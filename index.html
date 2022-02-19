@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="image">
+            <img class="image" src="facebook-eyes-1_0.png" alt="">
+        </div>
+        <div class="buttons">
+            <button class="btn" data-key="65">A <div class="tetx">CLAP</div></button>
+            <button class="btn" data-key="83">S <div class="tetx">HIHAT</div></button>
+            <button class="btn" data-key="68">D <div class="tetx">KICK</div></button>
+            <button class="btn" data-key="70">F <div class="tetx">OPENHAT</div></button>
+            <button class="btn" data-key="71">G <div class="tetx">BOOM</div></button>
+            <button class="btn" data-key="72">H <div class="tetx">RIDE</div></button>
+            <button class="btn" data-key="74">J <div class="tetx">SNARE</div></button>
+            <button class="btn" data-key="75">K <div class="tetx">TOM</div></button>
+            <button class="btn" data-key="76">L <div class="tetx">TINK</div></button>
+        </div>
+    </div>
+    <audio data-key="65" src="mixkit-drum-and-percussion-545.wav"></audio>
+    <audio data-key="83" src="mixkit-drum-bass-hit-2294.wav"></audio>
+    <audio data-key="68" src="mixkit-losing-drums-2023.wav"></audio>
+    <audio data-key="70" src="mixkit-negative-tone-interface-tap-2569.wav"></audio>
+    <audio data-key="71" src="mixkit-short-bass-hit-2299.wav"></audio>
+    <audio data-key="72" src="mixkit-soft-horror-hit-drum-564.wav"></audio>
+    <audio data-key="74" src="mixkit-spring-metal-hit-2302.wav"></audio>
+    <audio data-key="75" src="mixkit-tribal-drum-echoes-574.wav"></audio>
+    <audio data-key="76" src="mixkit-tribal-dry-drum-558.wav"></audio>
+
+    <script>
+
+        function playSound(e){
+            const audio=document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key=document.querySelector(`.btn[data-key="${e.keyCode}"]`);
+            if(!audio) return;
+            audio.currentTime = 0;
+            audio.play();
+            key.classList.add('playing');
+        }
+
+        function removeTransition(e){
+            if(e.propertyName !== 'transform') return;
+            this.classList.remove('playing');
+        }
+
+        const keys = document.querySelectorAll('.btn',);
+        keys.forEach(key => key.addEventListener('transitionend',removeTransition));
+
+        window.addEventListener('keydown', playSound);
+    </script>
+</body>
+
+</html>
